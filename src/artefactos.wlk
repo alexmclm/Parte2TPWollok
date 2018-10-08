@@ -1,6 +1,6 @@
 import Personaje.*
 class Armas {
-
+//
 //	var unidadesDeLucha = 0
 
 	method aporteLucha(duenio) {
