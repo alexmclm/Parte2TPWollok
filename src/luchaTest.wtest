@@ -1,0 +1,76 @@
+import Personaje.*
+import hechizos.*
+import artefactos.*
+describe "Lucha" {
+		const rolando
+		const espadaDeDesierto
+		//arreglar el tema de la mascara oscura con el tema de poder cuando hay eclipse ..donde ponerlo?!
+		fixture{
+			rolando = new Personaje()
+			espadaDeDesierto = new Armas()
+		}
+	test "eliminar todos los artefactos de rolando, conociendo asi su habilidad de lucha que debe ser 1" {
+		rolando.limpiaArtefactos()
+		assert.equals(rolando.habilidadLucha(), 1)
+	}
+
+	test "la habilidad de lucha de rolando con todos sus artefactos, debe ser 13" {
+		collarDivino.cantidadDePerlas(5)
+		collarDivino.aporteLucha(rolando)
+		espadaDeDesierto.aporteLucha(rolando)
+		mascaraOscura.poderArtefacto(mundo.fuerzaOscura())
+		mascaraOscura.aporteLucha(rolando) // mmmm 
+		rolando.agregaArtefactos([ espadaDeDesierto, collarDivino, mascaraOscura ])
+		rolando.obtenerPoderDeLosArtefactos()
+		rolando.lucha()
+		assert.equals(rolando.habilidadLucha(), 13)
+	}
+
+	test "cambiar cantidad de perlas a 3, conociendo la habilidad de lucha de rolando con los artefactos, debe ser 11" {
+		collarDivino.cantidadDePerlas(3)
+		collarDivino.aporteLucha(rolando)
+		espadaDeDesierto.aporteLucha(rolando)
+
+		mascaraOscura.poderArtefacto(mundo.fuerzaOscura())
+		mascaraOscura.aporteLucha(rolando) // mmmm 
+		rolando.agregaArtefactos([ espadaDeDesierto, collarDivino, mascaraOscura ])
+		rolando.obtenerPoderDeLosArtefactos()
+		rolando.lucha()
+		assert.equals(rolando.habilidadLucha(), 11)
+	}
+
+// hay un error en el testeo del pdf, ya que esta hecho con collar divino = 3, y la suma da 18, debe ser collardivino = 5 para que de 20
+	test " valor base de lucha de rolando a 8, conociendod la habilidad de este con los artefactos, debe ser 20" {
+		collarDivino.cantidadDePerlas(5)
+		collarDivino.aporteLucha(rolando)
+		espadaDeDesierto.aporteLucha(rolando)
+		mascaraOscura.poderArtefacto(mundo.fuerzaOscura())
+		mascaraOscura.aporteLucha(rolando) // mmmm 
+		rolando.habilidadLucha(8)
+		rolando.agregaArtefactos([ espadaDeDesierto, collarDivino, mascaraOscura ])
+		rolando.obtenerPoderDeLosArtefactos()
+		rolando.lucha()
+		assert.equals(rolando.habilidadLucha(), 20)
+	}
+	test "ocurre un eclipse afectando a rolando en si, el valor de lucha de la mascaraOscura" {
+		mundo.eclipse()
+		mundo.fuerzaOscura()
+		mascaraOscura.poderArtefacto(mundo.fuerzaOscura())
+		assert.equals(mascaraOscura.aporteLucha(rolando),5)
+	}
+	test "eliminar mascaraOscura de la lista de artefactos de rolando, obteniendo su habiliad de lucha , que es 9" {
+		
+		collarDivino.cantidadDePerlas(5)
+		mascaraOscura.poderArtefacto(mundo.fuerzaOscura())
+		rolando.agregaArtefactos([ espadaDeDesierto, collarDivino, mascaraOscura ])
+		rolando.eliminarArtefacto(mascaraOscura)
+		rolando.lucha()
+		assert.equals(rolando.habilidadLucha(),9)
+	}
+	// nuevos test
+	test "tiene una mascara , con un indice de oscuridad de 0. Preguntar valor lucha de la mascara oscura de rolando. Debe ser 4"{
+		assert.that(true)
+	}
+
+}
+
