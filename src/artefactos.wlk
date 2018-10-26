@@ -33,14 +33,12 @@ class Mascaras{
 	var valorLucha
 	method poderArtefacto() {
 		if(mundo.fuerzaOscura()<= 5)
-		valorLucha = unidadesDeLuchaMinimo.max(mundo.fuerzaOscura() / 2) * self.indiceOscuridad()
+		valorLucha = unidadesDeLuchaMinimo.max((mundo.fuerzaOscura() / 2) * self.indiceOscuridad())
 		else{
 			valorLucha = 5
 		}
 	}
-	method modificarIndice(unIndice) {
-		indiceOscuridad = unIndice
-	}
+
 	method modificarUnidadLuchaMinimo(nuevaUnidad){
 		unidadesDeLuchaMinimo = nuevaUnidad
 	}
