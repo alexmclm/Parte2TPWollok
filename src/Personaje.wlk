@@ -100,18 +100,26 @@ class Personaje {
 	
 	//
 	method canjearHechizoPorProducto(unProducto){
-		reconocerMitadPrecioHechizo = hechizoCanjeado.precioDeLista() / 2  // veremos como se lo cambia
-		
-		self.cambiarHechizoPreferido(unProducto) // se vuelve el preferido al canjear hechizo
-		
+		reconocerMitadPrecioHechizo = hechizoCanjeado.precioDeLista() / 2  // veremos como se lo cambia . Edit: y que sucede con esto?
+		if(self.loPuedoComprar(unProducto)){
+			self.cambiarHechizoPreferido(unProducto) // se vuelve el preferido al canjear hechizo
+			self.restarMonedero(reconocerMitadPrecioHechizo)
+		}
 	}
 	
 	method canjearArtefactos(unProducto){
-		
+		if(self.loPuedoComprar(unProducto)){
+			self.agregaArtefactos(unProducto)
+			 self.restarMonedero(unProducto.precioDeLista())
+		}
 	}
 	method loPuedoComprar(unProducto){
 		return unProducto.precioDeLista(self)<= self.monedas()
 	}
+	method restarMonedero(unaCantidad){
+		return self.monedas((self.monedas() - unaCantidad).max(0)) // no comments sobre los issues  jajajaa
+	}
+	
 }
 
 
