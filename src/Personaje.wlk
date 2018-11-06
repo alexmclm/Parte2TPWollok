@@ -17,10 +17,10 @@ class Personaje {
 	var property habilidadLucha = 1
 	var property artefactos = []
 	var  puntosDeLuchaDelMejorArtefacto = 0
-	var armadura
+	var property armadura
 	
 	var property monedas = 100
-	var hechizoCanjeado
+	//var hechizoCanjeado
 	var reconocerMitadPrecioHechizo
 	
 	method hechiceriaBase() = hechiceriaBase // get
@@ -100,19 +100,23 @@ class Personaje {
 	
 	//
 	method canjearHechizoPorProducto(unProducto){
-		reconocerMitadPrecioHechizo = hechizoCanjeado.precioDeLista() / 2  // veremos como se lo cambia . Edit: y que sucede con esto?
-		if(self.loPuedoComprar(unProducto)){
+		reconocerMitadPrecioHechizo = unProducto.precioDeLista() / 2  // veremos como se lo cambia . Edit: y que sucede con esto?
+		if(self.loPuedoComprar(unProducto).negate()){
+				throw new Exception (" es pobre y no lo puede obtener!")
+			}
 			self.cambiarHechizoPreferido(unProducto) // se vuelve el preferido al canjear hechizo
 			self.restarMonedero(reconocerMitadPrecioHechizo)
 		}
-	}
 	
-	method canjearArtefactos(unProducto){
-		if(self.loPuedoComprar(unProducto)){
+	
+	method canjearArtefactos(unProducto){ //seria lo que compra, pero lo pongo para 
+		if(self.loPuedoComprar(unProducto).negate()){
+			throw new Exception (" no puedo comprarlo")
+			}
 			self.agregaArtefactos(unProducto)
 			 self.restarMonedero(unProducto.precioDeLista())
 		}
-	}
+	
 	method loPuedoComprar(unProducto){
 		return unProducto.precioDeLista(self)<= self.monedas()
 	}

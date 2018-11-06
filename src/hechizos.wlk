@@ -2,7 +2,7 @@ import Personaje.*
 
 class HechizoLogos {
 
-	var nombre = "espectroMalefico"
+	var property nombre = "espectroMalefico"
 	//he aqui, arreglar el poder que desde ese metoido se le calcule 
 	var poder = 17
 
