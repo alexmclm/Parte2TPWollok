@@ -1,5 +1,6 @@
 import artefactos.*
 import hechizos.*
+import PesoArtefacto.*
 
 object mundo{
 	var fuerzaOscura = 5
@@ -22,6 +23,8 @@ class Personaje {
 	var property monedas = 100
 	//var hechizoCanjeado
 	var reconocerMitadPrecioHechizo
+	
+	var property cargaMaximaQueSoporta 
 	
 	method hechiceriaBase() = hechiceriaBase // get
 
@@ -123,6 +126,14 @@ class Personaje {
 	method restarMonedero(unaCantidad){
 		return self.monedas((self.monedas() - unaCantidad).max(0)) // no comments sobre los issues  jajajaa
 	}
+	
+	
+	method puedeCargarArtefacto(unArtefacto){
+		return unArtefacto.pesoTotal() <= self.cargaMaximaQueSoporta()
+	}
+	/////***
+	
+	
 	
 }
 
